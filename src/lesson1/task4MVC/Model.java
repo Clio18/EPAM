@@ -1,4 +1,4 @@
-package lesson1.task4.Task4MVC;
+package lesson1.task4MVC;
 
 public class Model {
     private int [][] array;
