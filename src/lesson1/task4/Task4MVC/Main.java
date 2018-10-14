@@ -1,4 +1,4 @@
-package lesson1.task4MVC;
+package lesson1.task4.Task4MVC;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,9 +6,9 @@ public class Main {
         Model model = new Model();
         Controller controller = new Controller(view, model);
 
+        model.setArray();
         view.printArray(model.getArray());
         controller.rotateArrayToLeft();
         controller.rotateArrayToRight();
-
     }
 }
