@@ -10,12 +10,10 @@ public class PyramidController {
     }
 
     public void getPyramid() {
-        model.setNumber(InputHelper.inputIntValueWithScanner(view));
+        model.setNumber(new InputHelper().inputIntValueWithScanner(view));
         model.setArray(model.getNumber());
 
-        view.printMessageAndResult(view.OUR_INT,
-               // model.getPyramid(model.getNumber(), model.getArray(), model.getLength(), model.getMid()));
-                model.getPyramid(model.getNumber(), model.getArray()));
+        view.printMessageAndResult(view.OUR_INT, model.getPyramid());
     }
 }
 
