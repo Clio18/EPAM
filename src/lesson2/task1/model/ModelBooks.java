@@ -1,16 +1,17 @@
 package lesson2.task1.model;
+
 import lesson2.task1.comparator.BookPublisherComparator;
 import lesson2.task1.model.entity.Book;
 import java.util.Arrays;
 
-public class Books {
+public class ModelBooks {
     private Book[] books;
 
-    public Book[] getBooks() {
+    public Book[] getModelBooks() {
         return books;
     }
 
-    public void setBooks(Book[] books) {
+    public void setModelBooks(Book[] books) {
         this.books = books;
     }
 
@@ -43,6 +44,11 @@ public class Books {
             }
         }
         return Arrays.copyOf(temp, count);
+    }
+    public Book [] getSortedBook(String message) {
+        System.out.println(message);
+        Arrays.sort(books, new BookPublisherComparator());
+        return books;
     }
 
 }

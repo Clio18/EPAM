@@ -1,83 +1,61 @@
 package lesson2.task1.controller;
 
 import lesson2.task1.data.Source;
-import lesson2.task1.model.Books;
+import lesson2.task1.model.ModelBooks;
 import lesson2.task1.model.entity.Book;
 import lesson2.task1.view.BookView;
-import lesson2.task1.view.View;
+import lesson2.task1.view.Menu;
+
 
 import java.util.Scanner;
 
 public class Controller {
-    private Books model = new Books();
+    private ModelBooks model = new ModelBooks();
     private BookView view = new BookView();
-    private View viewOfCommand = new View();
 
 
-    public void run(int number) {
-        model.setBooks(Source.getBook());
-
-        switch (number) {
-            case 0:
-                viewOfCommand.getListOfCommands();
-                break;
-            case 1:
-                view.printBook("All books: ", model.getBooks());
-                break;
-            case 2:
-                searchByAuthor();
-                break;
-            case 3:
-                searchByPublisher();
-                break;
-            case 4:
-                searchBooksFromYear();
-            case 5:
-                view.printSortedBook("Sorted books by publisher: ", model.getBooks());
-        }
-
-    }
-
-    private void searchByAuthor() {
-        System.out.println("Enter the name of author: ");
+    public void run() {
+        model.setModelBooks(Source.getBook());
+        view.printMenu();
         Scanner scanner = new Scanner(System.in);
-        String author = scanner.nextLine();
-        Book[] result = model.getByAuthor(author);
-        if (result.length == 0) {
-            view.printMessage("No books by " + author);
-        } else {
-            view.printBook("Author - " + author, result);
+        while (true) {
+            int number = scanner.nextInt();
+            if (number >= new Menu().getMenu().length || number < 0) {
+                view.printMessage(view.NOT_VALID);
+            } else
+                switch (number) {
+                    case 1:
+                        view.printMenu();
+                        break;
+                    case 2:
+                        view.printBook(model.getModelBooks());
+                        break;
+                    case 3:
+                        view.printMessage(view.INPUT_AUTHOR);
+                        scanner.nextLine();
+                        view.printBook(model.getByAuthor(scanner.nextLine()));
+                        break;
+                    case 4:
+                        view.printMessage(view.INPUT_PUBLISHER);
+                        scanner.nextLine();
+                        view.printBook(model.getByPublisher(scanner.nextLine()));
+                        break;
+                    case 5:
+                        view.printMessage(view.INPUT_YEAR);
+                        int year = scanner.nextInt();
+                        if (model.getBooksFromYear(year).length == 0 || year < 0) {
+                            view.printMessage(view.WARNING_YEAR + " " + year);
+                        } else
+                            view.printBook(model.getBooksFromYear(year));
+                        break;
+                    case 6:
+                        view.printBook(model.getSortedBook(view.SORT_PUBLISHER));
+                        break;
+                    case 0:
+                        return;
+                }
         }
+
     }
-
-    private void searchByPublisher() {
-        System.out.println("Enter the publisher: ");
-        Scanner scanner = new Scanner(System.in);
-        String publisher = scanner.nextLine();
-        Book[] result = model.getByPublisher(publisher);
-        if (result.length == 0) {
-            view.printMessage("No books by " + publisher);
-        } else {
-            view.printBook("Publisher - " + publisher, result);
-        }
-    }
-
-    private void searchBooksFromYear() {
-        System.out.println("Enter the year to start the search from: ");
-        try {
-            Scanner scanner = new Scanner(System.in);
-            int startYear = scanner.nextInt();
-            Book[] result = model.getBooksFromYear(startYear);
-            if (result.length == 0) {
-                view.printMessage("No books by " + startYear);
-            } else {
-                view.printBook("All books from " + startYear, result);
-            }
-        }catch (Exception e){
-            System.out.println("Not a number!Choose command from the list");
-        }
-    }
-
-
 
 }
