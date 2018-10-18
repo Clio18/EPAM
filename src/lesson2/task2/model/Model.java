@@ -21,7 +21,7 @@ public class Model {
     public double getSumSquareOfDefiniteShape(String s){
         double sum = 0;
         for (Shape shapes:listOfShapes){
-            if (shapes.getClass().getSimpleName().equals(s)){
+            if (shapes.getClass().getSimpleName().toLowerCase().equals(s.toLowerCase())){
                 sum = sum + shapes.calcArea();
             }
         }

@@ -7,35 +7,39 @@ import lesson2.task2.model.shape.Shape;
 import java.util.Arrays;
 
 public class View {
-    public void printShapes (Shape[] shapes){
-        for (Shape shape:shapes){
+    public static final String MAIN_COMMAND = "Enter the command: ";
+    public static final String INPUT_SHAPE = "Enter the name of the shape: ";
+    public static final String SUM_OF_SHAPES = "Total sum of all shapes is:  ";
+    public static final String SQUARE_SHAPE = "The sum of squares of chosen shapes: ";
+    public static final String NOT_VALID = "Inexistent command!Choose command from the list!";
+    private Menu menu = new Menu();
+
+    public void printShapes(Shape[] shapes) {
+        for (Shape shape : shapes) {
             System.out.println(shape);
         }
     }
-    public void printSortedListOfShapesBySquare(Shape[] shapes){
+
+    public void printSortedListOfShapesBySquare(Shape[] shapes) {
         Arrays.sort(shapes, new MaxSquareComparator());
-        for (Shape shape:shapes){
-            System.out.println(shape);
-        }
+        printShapes(shapes);
     }
-    public void printSortedListOfShapesByColor(Shape[] shapes){
+
+    public void printSortedListOfShapesByColor(Shape[] shapes) {
         Arrays.sort(shapes, new ColorShapeComparator());
-        for (Shape shape:shapes){
-            System.out.println(shape);
-        }
+        printShapes(shapes);
     }
+
     public void getListOfCommands() {
-        String [] listOfCommands = new String[]{
-                "Show all commands - enter 0",
-                "Show all shapes - enter 1",
-                "Get sum of all shape's square - enter 2",
-                "Get sum of chosen shape's square - enter 3",
-                "Sorted shapes by square - enter 4",
-                "Sorted shapes by color - enter 5",
-                "Finish program - enter -1"
-        };
-        for (String command:listOfCommands){
+        for (String command : menu.getMenu()) {
             System.out.println(command);
         }
+    }
+
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+    public void printMessageAndResult(String message, double value) {
+        System.out.println(message + value);
     }
 }
