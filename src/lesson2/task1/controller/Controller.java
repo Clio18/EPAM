@@ -1,61 +1,58 @@
 package lesson2.task1.controller;
 
+import lesson2.task1.comparator.BookPublisherComparator;
 import lesson2.task1.data.Source;
-import lesson2.task1.model.ModelBooks;
-import lesson2.task1.model.entity.Book;
+import lesson2.task1.model.Model;
+import lesson2.task1.service.Service;
 import lesson2.task1.view.BookView;
-import lesson2.task1.view.Menu;
 
-
-import java.util.Scanner;
 
 public class Controller {
-    private ModelBooks model = new ModelBooks();
+    private Service service = new Service(new Model());
     private BookView view = new BookView();
 
 
     public void run() {
-        model.setModelBooks(Source.getBook());
         view.printMenu();
-        Scanner scanner = new Scanner(System.in);
         while (true) {
-            int number = scanner.nextInt();
-            if (number >= new Menu().getMenu().length || number < 0) {
-                view.printMessage(view.NOT_VALID);
-            } else
-                switch (number) {
-                    case 1:
-                        view.printMenu();
-                        break;
-                    case 2:
-                        view.printBook(model.getModelBooks());
-                        break;
-                    case 3:
-                        view.printMessage(view.INPUT_AUTHOR);
-                        scanner.nextLine();
-                        view.printBook(model.getByAuthor(scanner.nextLine()));
-                        break;
-                    case 4:
-                        view.printMessage(view.INPUT_PUBLISHER);
-                        scanner.nextLine();
-                        view.printBook(model.getByPublisher(scanner.nextLine()));
-                        break;
-                    case 5:
-                        view.printMessage(view.INPUT_YEAR);
-                        int year = scanner.nextInt();
-                        if (model.getBooksFromYear(year).length == 0 || year < 0) {
-                            view.printMessage(view.WARNING_YEAR + " " + year);
-                        } else
-                            view.printBook(model.getBooksFromYear(year));
-                        break;
-                    case 6:
-                        view.printBook(model.getSortedBook(view.SORT_PUBLISHER));
-                        break;
-                    case 0:
-                        return;
-                }
+            int number = view.inputValue();
+            if (number != -1 && number <= 6) switch (number) {
+                case 1:
+                    view.printMenu();
+                    break;
+                case 2:
+                    view.printBook(Source.getBook());
+                    break;
+                case 3:
+                    view.printMessage(BookView.INPUT_AUTHOR);
+                    view.inputName();
+                    view.printBook(service.getByAuthor(view.inputName()));
+                    break;
+                case 4:
+                    view.printMessage(BookView.INPUT_PUBLISHER);
+                    view.inputName();
+                    view.printBook(service.getByPublisher(view.inputName()));
+                    break;
+                case 5:
+                    view.printMessage(BookView.INPUT_YEAR);
+                    int year = view.inputValue();
+                    if (service.getBooksFromYear(year).length == 0 || year < 0) {
+                        view.printMessage(BookView.WARNING_YEAR + " " + year);
+                    } else view.printBook(service.getBooksFromYear(year));
+                    break;
+                case 6:
+                    view.printBook(service.getSortedBook(BookView.SORT_PUBLISHER, new BookPublisherComparator()));
+                    break;
+                case 0:
+                    return;
+            }
+            else {
+                view.printMessage(BookView.NOT_VALID);
+                break;
+            }
         }
 
     }
+
 
 }
