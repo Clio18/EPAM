@@ -29,7 +29,7 @@ public class Game extends Toy{
     public String toString() {
         return this.getName() +
                 " numberOfPlayers = " + numberOfPlayers +
-                " minDuration = " + minDuration + ", " +
+                " minDuration of playing = " + minDuration + ", " +
                 super.toString();
     }
 }

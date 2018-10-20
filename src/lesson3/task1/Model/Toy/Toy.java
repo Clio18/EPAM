@@ -1,6 +1,6 @@
 package lesson3.task1.Model.Toy;
 
-public class Toy {
+public abstract class Toy { //должен быть абстракт
     private String name;
     private String material;
     private int ageFrom;

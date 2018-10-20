@@ -1,25 +1,25 @@
 package lesson3.task1.Model.Toy;
 
 public class Doll extends Toy {
-    private String typeOfDoll;
+    private String typeOfToy;
 
-    public Doll(String name, String material, int ageFrom, double price, String typeOfDoll) {
+    public Doll(String name, String material, int ageFrom, double price, String typeOfToy) {
         super(name, material, ageFrom, price);
-        this.typeOfDoll=typeOfDoll;
+        this.typeOfToy=typeOfToy;
     }
 
     public String getTypeOfDoll() {
-        return typeOfDoll;
+        return typeOfToy;
     }
 
-    public void setTypeOfDoll(String typeOfDoll) {
-        this.typeOfDoll = typeOfDoll;
+    public void setTypeOfDoll(String typeOfToy) {
+        this.typeOfToy = typeOfToy;
     }
 
     @Override
     public String toString() {
         return this.getName() +
-                " typeOfDoll = " + typeOfDoll + ", " +
+                " typeOfToy = " + typeOfToy + ", " +
                 super.toString();
     }
 }
