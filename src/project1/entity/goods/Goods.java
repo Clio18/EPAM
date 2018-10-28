@@ -23,4 +23,11 @@ public class Goods {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Goods is: " +
+                coffee + ", " + "\n" +
+                "Quantity: " + quantity;
+    }
 }

@@ -6,6 +6,8 @@ import project1.entity.tracks.StarBucksTrak;
 import project1.model.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Service {
@@ -31,17 +33,22 @@ public class Service {
         int quantity = scanner.nextInt();
         if (goods.getCoffee().getVolume() * quantity < starBucksTrak.getFullVolume()) {
             goods.setQuantity(quantity);
+        } else {
+            System.out.println("Is full");
+            return starBucksTrak;
         }
-
         starBucksTrak.getList().add(goods);
         return starBucksTrak;
     }
 
     public void printStarBucksTrak() {
         for (Goods goods : starBucksTrak.getList()) {
-            System.out.println(
-                    "Good is: " + goods.getCoffee() + "\n" + "Quantity is: " + goods.getQuantity());
+            System.out.println(goods.toString());
         }
+    }
+    public void printSorted(Comparator comparator) {
+        starBucksTrak.getList().sort(comparator);
+        printStarBucksTrak();
     }
 
     public Goods createGoods() { //получаю выбрванный по типу и марке кофе
