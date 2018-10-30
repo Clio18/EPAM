@@ -2,9 +2,12 @@ package project1.controller;
 
 import lesson3.task1.Comparator.PriceComparator;
 import project1.comparator.PriceWeightComparator;
+import project1.entity.tracks.StarBucksTrak;
 import project1.service.Service;
 import project1.view.Menu;
 import project1.view.View;
+
+import java.util.List;
 
 public class Controller {
 
@@ -24,11 +27,16 @@ public class Controller {
                         view.getListOfCommands();
                         break;
                     case 2:
-                        service.getFullTrack();
+                        StarBucksTrak starBucksTrak = service.getFullTrack();
                         service.printStarBucksTrak();
                         break;
                     case 3:
                         service.printSorted(new PriceWeightComparator());
+                        break;
+                    case 4:
+                        List<String> request = service.makeRequest();
+                        System.out.println(request);
+                        service.findGoodsFromTrack(request);
                         break;
                     case 0:
                         return;

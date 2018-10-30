@@ -8,6 +8,7 @@ public class Menu {
                 "Show all commands - enter 1",
                 "Add goods to the track - enter 2",
                 "Sort coffee by price/weight - enter 3",
+                "Make request - enter 4",
                 "Finish program - enter 0"};
     }
 }
